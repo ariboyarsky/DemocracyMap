@@ -48,7 +48,7 @@ var path = d3.geo.path()
 var g = svg.append("g");
 
 // load and display the World
-d3.json("world.json", function(error, topology) {
+d3.json("json/world.json", function(error, topology) {
     g.selectAll("path")
       .data(topojson.object(topology, topology.objects.map)
           .geometries)
