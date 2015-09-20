@@ -10,7 +10,7 @@
   .state{
     fill: #ddc;
   }
-  .state:hover{
+  .state:hover {
     cursor: pointer;
     fill:#E6550D;
     -webkit-transition: fill 1s, -webkit-transform 1s;
@@ -29,14 +29,14 @@
 
 <body>
   <script src="http://d3js.org/d3.v3.min.js"></script>
-  <script src="http://d3js.org/topojson.v0.min.js"></script>
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
   <script type="text/javascript">
   var width = 960,
     height = 500;
 
 var projection = d3.geo.mercator()
     .center([0, 5 ])
-    .scale(200);
+    .scale(100);
 
 var svg = d3.select("body").append("svg")
     .attr("width", width)
@@ -50,20 +50,20 @@ var g = svg.append("g");
 // load and display the World
 d3.json("json/world.json", function(error, topology) {
     g.selectAll("path")
-      .data(topojson.object(topology, topology.objects.map)
-          .geometries)
+      .data(topojson.feature(topology, topology.objects.states)
+          .features)
     .enter()
       .append("path")
       .attr("class", function(d) {return "state " +d.id})
       .attr("d", path)
 
     svg.selectAll(".state-label")
-      .data(topojson.object(topology, topology.objects.map).geometries)
+      .data(topojson.feature(topology, topology.objects.states).features)
       .enter().append("text")
       .attr("class", function(d) { return "state state-label " + d.id; })
       .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
       .attr("dy", ".01em")
-      .text(function(d) { return d.properties.name; });
+      .text(function(d) { return d.properties.sovereignt; });
 });
 
 
