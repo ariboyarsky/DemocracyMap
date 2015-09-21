@@ -144,7 +144,7 @@ d3.json("json/world.json", function(error, topology) {
             .attr("width", 200)
             .attr("height", 200);
 
-    var circles = svgContainer.selectAll("circle")
+    var circles = legendContain.selectAll("circle")
             .data(legendCircles)
             .enter()
             .append("circle");
