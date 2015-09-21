@@ -1,5 +1,5 @@
 # DemocracyMap
-Track global political and economic trends and change.
+Track global political and economic trends and change. See www.ariboyarsky.com/project/DemocracyMap for example.
 
 
 This is released under a creative commons attribution license. Please see bibliography below for sources and datasets.
