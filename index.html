@@ -20,9 +20,29 @@
       margin: auto;
       text-align: center;
   }
-  .state{
-    fill: #ddc;
+  /*Color code for Polity IV scores */
+  .fullDemocracy{
+    fill:#5878B9;
   }
+  .democracy{
+    fill:#C7DEFE;
+  }
+  .openAuto{
+    fill:#8197AF;
+  }
+  .closedAuto{
+    fill:#AD8D8D;
+  }
+  .auto{
+    fill:#DC383F;
+  }
+  .failed{
+    fill:#000000;
+  }
+  .noData{
+    fill:#FFFFFF;
+  }
+  /* end polity color codes */
   .state:hover {
     cursor: pointer;
     fill:#E6550D;
@@ -81,7 +101,25 @@ d3.json("json/world.json", function(error, topology) {
           .features)
     .enter()
       .append("path")
-      .attr("class", function(d) {return "state " +d.id})
+      .attr("class", function(d)
+            //color code map
+                var score = d.properties.p4_score;
+                if(score == 10) {
+                    return "fullDemocracy";
+                }else if(score >= 6 && score < 10) {
+                    return "democracy";
+                }else if(score >=1 && score < 6) {
+                    return "openAuto";
+                }else if(score >= -5 && score < 0) {
+                    return "closedAuto";
+                }else if(score >= -10 && score < -5) {
+                    return "auto";
+                }else if (score == 0) {
+                    return "failed";
+                }else {
+                    return "noData";
+                }
+        })
       .attr("d", path)
       .call(d3.helper.tooltip(
                     function(d, i){
