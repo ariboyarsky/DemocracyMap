@@ -101,7 +101,7 @@ d3.json("json/world.json", function(error, topology) {
           .features)
     .enter()
       .append("path")
-      .attr("class", function(d)
+      .attr("class", function(d){
             //color code map
                 var score = d.properties.p4_score;
                 if(score == 10) {
