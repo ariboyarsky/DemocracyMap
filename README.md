@@ -2,7 +2,7 @@
 Track global political and economic trends and change. See www.ariboyarsky.com/project/DemocracyMap for the project's current home page.
 
 
-DemocracyMap is released under a creative commons attribution license. Please see bibliography below for sources and datasets.
+DemocracyMap is released under a creative commons attribution license (see License.md for further details). Please see bibliography below for sources and datasets.
 
 #Bibliography
 
