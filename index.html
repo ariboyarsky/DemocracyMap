@@ -130,6 +130,29 @@ d3.json("json/world.json", function(error, topology) {
                         return '<b>'+ d.properties.sovereignt + '</b><br /><span>Polity IV Score: '+(d.properties.p4_score ? d.properties.p4_score : 'No Data')+'</span><div style="clear: both"></div>';
                     }
             ));
+    var legendCircles = [
+        {"x_axis": 30, "y_axis": 30, "radius": 10, "class": "fullDemocracy"},
+        {"x_axis": 30, "y_axis": 45, "radius": 10, "class": "democracy"},
+        {"x_axis": 30, "y_axis": 60, "radius": 10, "class": "openAuto"},
+        {"x_axis": 30, "y_axis": 75, "radius": 10, "class": "closedAuto"},
+        {"x_axis": 30, "y_axis": 90, "radius": 10, "class": "auto"},
+        {"x_axis": 30, "y_axis": 105, "radius": 10, "class": "failed"},
+        {"x_axis": 30, "y_axis": 120, "radius": 10, "class": "noData"}
+    ];
+
+    var legendContain = d3.select("body").append("svg")
+            .attr("width", 200)
+            .attr("height", 200);
+
+    var circles = svgContainer.selectAll("circle")
+            .data(legendCircles)
+            .enter()
+            .append("circle");
+    var circleAttributes = circles
+            .attr("cx", function(d){return d.x_axis; })
+            .attr("cy", function(d){return d.y_axis; })
+            .attr("r", function(d){return d.radius; })
+            .attr("class", function(d){return d.class; });
 });
 
 
