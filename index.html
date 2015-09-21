@@ -131,13 +131,13 @@ d3.json("json/world.json", function(error, topology) {
                     }
             ));
     var legendCircles = [
-        {"x_axis": 30, "y_axis": 30, "radius": 10, "class": "fullDemocracy"},
-        {"x_axis": 30, "y_axis": 55, "radius": 10, "class": "democracy"},
-        {"x_axis": 30, "y_axis": 80, "radius": 10, "class": "openAuto"},
-        {"x_axis": 30, "y_axis": 105, "radius": 10, "class": "closedAuto"},
-        {"x_axis": 30, "y_axis": 130, "radius": 10, "class": "auto"},
-        {"x_axis": 30, "y_axis": 155, "radius": 10, "class": "failed"},
-        {"x_axis": 30, "y_axis": 180, "radius": 10, "class": "noData"}
+        {"x_axis": 30, "y_axis": 30, "radius": 10, "class": "fullDemocracy", "text": "Full Democracy (Polity IV: 10)"},
+        {"x_axis": 30, "y_axis": 55, "radius": 10, "class": "democracy", "text": "Democracy (Polity IV: 6 to 9)"},
+        {"x_axis": 30, "y_axis": 80, "radius": 10, "class": "openAuto", "text": "Open Anocracy (Polity IV: 1 to 5)"},
+        {"x_axis": 30, "y_axis": 105, "radius": 10, "class": "closedAuto", "text": "Closed Anocracy (Polity IV: -5 to 0)"},
+        {"x_axis": 30, "y_axis": 130, "radius": 10, "class": "auto", "text": "Autocracy (Polity IV: -10 to -6)"},
+        {"x_axis": 30, "y_axis": 155, "radius": 10, "class": "failed", "text": "Failed/Occupied (Polity IV: 0)"},
+        {"x_axis": 30, "y_axis": 180, "radius": 10, "class": "noData", "text": "No Polity Data"}
     ];
 
     var legendContain = d3.select("body").append("svg")
@@ -152,7 +152,10 @@ d3.json("json/world.json", function(error, topology) {
             .attr("cx", function(d){return d.x_axis; })
             .attr("cy", function(d){return d.y_axis; })
             .attr("r", function(d){return d.radius; })
-            .attr("class", function(d){return d.class; });
+            .attr("class", function(d){return d.class; })
+            .text(function(d){return d.text;}
+    );
+
 });
 
 
