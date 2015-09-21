@@ -71,7 +71,7 @@ d3.json("json/world.json", function(error, topology) {
 
     svg.selectAll(".state-label")
       .data(topojson.feature(topology, topology.objects.states).features)
-      .enter().append("text")
+      .enter().append("path")
       .attr("class", function(d) { return "state state-label " + d.id; })
       .call(d3.helper.tooltip(
                     function(d, i){
