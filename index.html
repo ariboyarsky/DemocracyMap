@@ -48,7 +48,7 @@
 
 var projection = d3.geo.mercator()
     .center([0, 5 ])
-    .scale(100);
+    .scale(150);
 
 var svg = d3.select("body").append("svg")
     .attr("width", width)
@@ -68,14 +68,9 @@ d3.json("json/world.json", function(error, topology) {
       .append("path")
       .attr("class", function(d) {return "state " +d.id})
       .attr("d", path)
-
-    svg.selectAll(".state-label")
-      .data(topojson.feature(topology, topology.objects.states).features)
-      .enter().append("path")
-      .attr("class", function(d) { return "state state-label " + d.id; })
       .call(d3.helper.tooltip(
                     function(d, i){
-                        return '<b>'+ d.properties.soverignt + '</b>';
+                        return '<b>'+ d.properties.sovereignt + '</b>';
                     }
             ));
 });
