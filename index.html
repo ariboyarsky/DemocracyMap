@@ -83,7 +83,7 @@ d3.json("json/world.json", function(error, topology) {
       .attr("d", path)
       .call(d3.helper.tooltip(
                     function(d, i){
-                        return '<b>'+ d.properties.sovereignt + '</b><br /><span>Polity IV Score: '+(d.properties.p4_score ? d.properties.p4_score : 'No Data')+'</span>';
+                        return '<b>'+ d.properties.sovereignt + '</b><br /><span>Polity IV Score: '+(d.properties.p4_score ? d.properties.p4_score : 'No Data')+'</span><div style="clear: both"></div>';
                     }
             ));
 });
