@@ -1,0 +1,3 @@
+
+json -e CSV\ Data/polity.csv --id-property sovereignt,p4_country -p -o world.json -- states.json
+
