@@ -5,11 +5,44 @@
   /*css*/
   path{
     stroke: white;
-    stroke-width: 0.5px;
+    stroke-width: 0.4px;
   }
-  .state{
-    fill: #ddc;
+  svg{
+      margin: auto;
+      text-align: center;
+      display: block;
   }
+  body{
+      font-size: 14px;
+      font-family: sans-serif;
+  }
+  div.info{
+      margin: auto;
+      text-align: center;
+  }
+  /*Color code for Polity IV scores */
+  .fullDemocracy{
+    fill:#5878B9;
+  }
+  .democracy{
+    fill:#C7DEFE;
+  }
+  .openAuto{
+    fill:#8197AF;
+  }
+  .closedAuto{
+    fill:#AD8D8D;
+  }
+  .auto{
+    fill:#DC383F;
+  }
+  .failed{
+    fill:#000000;
+  }
+  .noData{
+    fill:#808080;
+  }
+  /* end polity color codes */
   .state:hover {
     cursor: pointer;
     fill:#E6550D;
@@ -27,24 +60,27 @@
 .tooltip{
     background-color:rgba(68,136,187,0.5);;
     margin: 10px;
-    height: 50px;
+    padding: 3px;
     width: 150px;
     padding-left: 10px;
     padding-top: 10px;
     -webkit-border-radius:10px;
     -moz-border-radius:10px;
     border-radius:10px;
+    clear: both;
+    overflow: auto;
 }
 </style>
-
+<head><title>DemocracyMap</title></head>
 <body>
+    <h1>DemocracyMap</h1>
   <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="http://d3js.org/topojson.v1.min.js"></script>
   <script src="http://d3js.org/queue.v1.min.js"></script>
   <script type="text/javascript" src="./tooltip.js"></script>
   <script type="text/javascript">
-  var width = 960,
-    height = 500;
+  var width = 1000,
+    height = 600;
 
 var projection = d3.geo.mercator()
     .center([0, 5 ])
@@ -66,15 +102,71 @@ d3.json("json/world.json", function(error, topology) {
           .features)
     .enter()
       .append("path")
-      .attr("class", function(d) {return "state " +d.id})
+      .attr("class", function(d){
+            //color code map
+                var score = d.properties.p4_score;
+                var cl = "";
+                if(score == 10) {
+                    cl = "fullDemocracy";
+                }else if(score >= 6 && score < 10) {
+                    cl = "democracy";
+                }else if(score >=1 && score < 6) {
+                    cl = "openAuto";
+                }else if(score >= -5 && score < 0) {
+                    cl = "closedAuto";
+                }else if(score >= -10 && score < -5) {
+                    cl = "auto";
+                }else if (score == 0) {
+                    cl = "failed";
+                }else {
+                    cl = "noData";
+                }
+                cl += " state";
+                return cl;
+        })
       .attr("d", path)
       .call(d3.helper.tooltip(
                     function(d, i){
-                        return '<b>'+ d.properties.sovereignt + '</b>';
+                        return '<b>'+ d.properties.sovereignt + '</b><br /><span>Polity IV Score: '+(d.properties.p4_score ? d.properties.p4_score : 'No Data')+'</span><div style="clear: both"></div>';
                     }
             ));
+    var legendCircles = [
+        {"x_axis": 30, "y_axis": 30, "radius": 10, "class": "fullDemocracy", "txt": "Full Democracy (Polity IV: 10)"},
+        {"x_axis": 30, "y_axis": 55, "radius": 10, "class": "democracy", "txt": "Democracy (Polity IV: 6 to 9)"},
+        {"x_axis": 30, "y_axis": 80, "radius": 10, "class": "openAuto", "txt": "Open Anocracy (Polity IV: 1 to 5)"},
+        {"x_axis": 30, "y_axis": 105, "radius": 10, "class": "closedAuto", "txt": "Closed Anocracy (Polity IV: -5 to 0)"},
+        {"x_axis": 30, "y_axis": 130, "radius": 10, "class": "auto", "txt": "Autocracy (Polity IV: -10 to -6)"},
+        {"x_axis": 30, "y_axis": 155, "radius": 10, "class": "failed", "txt": "Failed/Occupied (Polity IV: 0)"},
+        {"x_axis": 30, "y_axis": 180, "radius": 10, "class": "noData", "txt": "No Polity Data"}
+    ];
+
+    var legendContain = d3.select("svg").append("svg")
+            .attr("width", 300)
+            .attr("height", 200)
+	    .attr("y", 250)
+	    .selectAll("g")
+	    .data(legendCircles);
+
+    var circles = legendContain.enter().append("g");
+
+    var circle = circles.append("circle")
+            .attr("cx", function(d){return d.x_axis; })
+            .attr("cy", function(d){return d.y_axis; })
+            .attr("r", function(d){return d.radius; })
+            .attr("class", function(d){return d.class; });
+
+   circles.append("text")
+		.attr("x", function(d) {return d.x_axis+15; })
+            	.attr("y", function(d) {return d.y_axis+5; })
+		.text(function(d){return d.txt;});
 });
 
 
   </script>
+  <div class="info">
+<p> The above map portrays useful data in understanding global political and economic trends. This is currently a work in progress. </p>
+<p> Please note: <br />All data is based on the 2014 figures. <br />The above map depicts only shows de facto states (e.g. The Palestinian territories are depicted as part of Israel). These omissions do not reflect the author's views rather they have been made for quantitative simplicity.  <br /> See readme.md for source citations. See license.md for open source attribution license.</p>
+<p>Source code is publicly available on <a href="https://github.com/ariboyarsky/DemocracyMap/">Github</a></p>
+<p> &copy; 2015 By Ariel V. Boyarsky</p>
+</div>
 </body>
