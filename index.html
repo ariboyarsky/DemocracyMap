@@ -156,6 +156,7 @@ d3.json("json/world.json", function(error, topology) {
             .attr("class", function(d){return d.class; });
 
     circles.append("text")
+            .attr("dx", function(d){return -20})
             .text(function(d){return d.txt;});
 });
 
