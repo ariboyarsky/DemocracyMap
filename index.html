@@ -79,8 +79,8 @@
   <script src="http://d3js.org/queue.v1.min.js"></script>
   <script type="text/javascript" src="./tooltip.js"></script>
   <script type="text/javascript">
-  var width = 960,
-    height = 500;
+  var width = 1000,
+    height = 600;
 
 var projection = d3.geo.mercator()
     .center([0, 5 ])
@@ -140,24 +140,25 @@ d3.json("json/world.json", function(error, topology) {
         {"x_axis": 30, "y_axis": 180, "radius": 10, "class": "noData", "txt": "No Polity Data"}
     ];
 
-    var legendContain = d3.select("body").append("svg")
-            .attr("width", 200)
-            .attr("height", 200);
+    var legendContain = d3.select("svg").append("svg")
+            .attr("width", 300)
+            .attr("height", 200)
+	    .attr("y", 250)
+	    .selectAll("g")
+	    .data(legendCircles);
 
-    var circles = legendContain.selectAll("circle")
-            .data(legendCircles)
-            .enter()
-            .append("circle")
+    var circles = legendContain.enter().append("g");
 
-    var circleAttributes = circles
+    var circle = circles.append("circle")
             .attr("cx", function(d){return d.x_axis; })
             .attr("cy", function(d){return d.y_axis; })
             .attr("r", function(d){return d.radius; })
             .attr("class", function(d){return d.class; });
 
-    legendContain.append("text")
-            .data(legendCircles)
-            .text(function(d){return d.txt;});
+   circles.append("text")
+		.attr("x", function(d) {return d.x_axis+15; })
+            	.attr("y", function(d) {return d.y_axis+5; })
+		.text(function(d){return d.txt;});
 });
 
 
