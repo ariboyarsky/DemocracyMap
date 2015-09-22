@@ -153,8 +153,8 @@ d3.json("json/world.json", function(error, topology) {
             .attr("cy", function(d){return d.y_axis; })
             .attr("r", function(d){return d.radius; })
             .attr("class", function(d){return d.class; })
-            .text(function(d){return d.text;}
-    );
+            .append("text", function(d){return d.text;}
+            );
 
 });
 
