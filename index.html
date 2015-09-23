@@ -125,6 +125,7 @@ d3.json("json/world.json", function(error, topology) {
                 return cl;
         })
       .attr("d", path)
+      .on("dblclick", dblClicked)
       .call(d3.helper.tooltip(
                     function(d, i){
                         return '<b>'+ d.properties.sovereignt 
@@ -135,6 +136,31 @@ d3.json("json/world.json", function(error, topology) {
 				+'</span><div style="clear: both"></div>';
                     }
             ));
+    function dblClicked(d) {
+        var x, y, k;
+
+        if (d && centered !== d) {
+            var centroid = path.centroid(d);
+            x = centroid[0];
+            y = centroid[1];
+            k = 4;
+            centered = d;
+        } else {
+            x = width / 2;
+            y = height / 2;
+            k = 1;
+            centered = null;
+        }
+
+        g.selectAll("path")
+                .classed("active", centered && function(d) { return d === centered; });
+
+        g.transition()
+                .duration(750)
+                .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
+                .style("stroke-width", 1.5 / k + "px");
+    }
+
     var legendCircles = [
         {"x_axis": 30, "y_axis": 30, "radius": 10, "class": "fullDemocracy", "txt": "Full Democracy (Polity IV: 10)"},
         {"x_axis": 30, "y_axis": 55, "radius": 10, "class": "democracy", "txt": "Democracy (Polity IV: 6 to 9)"},
