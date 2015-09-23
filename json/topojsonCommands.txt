@@ -1,3 +1,5 @@
 
 json -e CSV\ Data/polity.csv --id-property sovereignt,p4_country -p -o world.json -- states.json
 
+csvjoin -c "p4_country,IU_Country Name" --outer polity.csv InternetUsers.csv
+
