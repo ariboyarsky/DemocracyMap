@@ -149,11 +149,13 @@ d3.json("json/world.json", function(error, topology) {
             y = centroid[1];
             k = 4;
             centered = d;
+	    legendBG.attr("fill-opacity", 0.5);	
         } else {
             x = width / 2;
             y = height / 2;
             k = 1;
             centered = null;
+	    legendBG.attr("fill-opacity", 0);
         }
 
         g.selectAll("path")
@@ -179,12 +181,20 @@ d3.json("json/world.json", function(error, topology) {
             .attr("width", 300)
             .attr("height", 200)
             //.attr("class", "legend")
-	    .attr("y", 250)
-	    .selectAll("g")
-	    .data(legendCircles);
+	    .attr("y", 250);
 
-    var circles = legendContain.enter().append("g");
+    var legendBG = legendContain.append("rect")
+                      .attr("width", "100%")
+                      .attr("height", "100%")
+                      .attr("fill", "white")
+                      .attr("fill-opacity", 0);
+	
+	var h  = legendContain.selectAll("g")
+             .data(legendCircles);
 
+
+    var circles = h.enter().append("g");
+ 		
     var circle = circles.append("circle")
             .attr("cx", function(d){return d.x_axis; })
             .attr("cy", function(d){return d.y_axis; })
@@ -196,18 +206,14 @@ d3.json("json/world.json", function(error, topology) {
             	.attr("y", function(d) {return d.y_axis+5; })
 		.text(function(d){return d.txt;});
 
-    circles.append("rect")
-            .attr("width", "100%")
-            .attr("height", "100%")
-            .attr("fill", "white");
-});
+  });
 
 
   </script>
   <div class="info">
 <p> The above map portrays useful data in understanding global political and economic trends. Double click on states to zoom in and out. This is currently a work in progress. </p>
 <p> Please note:
-    <br />All data is based on the 2014 figures. GDP per capita growth figures have been rounded to three decimal places.
+    <br />All data is based on the 2014 figures. GDP per capita growth statistics have been rounded to three decimal places.
     <br />The above map depicts only de facto states (e.g. the Palestinian territories are depicted as part of Israel). These omissions do not reflect the author's views rather they have been made for quantitative simplicity.
     <br /> See <a href="README.md">readme</a> for source citations. See <a href="LICENSE.md">license</a> file for open source attribution license.</p>
 <p>Source code is publicly available on <a href="https://github.com/ariboyarsky/DemocracyMap/">Github</a></p>
