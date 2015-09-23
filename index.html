@@ -200,6 +200,11 @@ d3.json("json/world.json", function(error, topology) {
 		.attr("x", function(d) {return d.x_axis+15; })
             	.attr("y", function(d) {return d.y_axis+5; })
 		.text(function(d){return d.txt;});
+
+    legendContain.append("rect")
+            .attr("width", "100%")
+            .attr("height", "100%")
+            .attr("fill", "white");
 });
 
 
