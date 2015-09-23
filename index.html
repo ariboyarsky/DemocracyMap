@@ -70,6 +70,9 @@
     clear: both;
     overflow: auto;
 }
+.legend{
+    background-color: rgba(255,255,255, 0.5);
+}
 </style>
 <head><title>DemocracyMap</title></head>
 <body>
@@ -175,6 +178,7 @@ d3.json("json/world.json", function(error, topology) {
     var legendContain = d3.select("svg").append("svg")
             .attr("width", 300)
             .attr("height", 200)
+            .attr("class", "legend")
 	    .attr("y", 250)
 	    .selectAll("g")
 	    .data(legendCircles);
