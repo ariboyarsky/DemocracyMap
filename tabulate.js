@@ -32,7 +32,7 @@ var tabulate = function (data,columns, columnNames) {
 }
 
 d3.csv('json/CSV Data/o.csv',function (data) {
-    var columnNames = ['Country', 'Data Year', 'Polity IV Score', 'Internet Users', 'GDP per capita growth (annual %)'];
+    var columnNames = ['Country', 'CCode', 'Data Year', 'Polity IV Score', 'Internet Users', 'GDP per capita growth (annual %)'];
     var columns = ['Country','data_year','p4_score','CCode', 'IU_2014', 'GDPPCC_2014']
     tabulate(data,columns, columnNames)
 })
