@@ -183,11 +183,6 @@ d3.json("json/world.json", function(error, topology) {
 	    .selectAll("g")
 	    .data(legendCircles);
 
-        legendContain.append("rect")
-                .attr("width", 100%)
-                .attr("height", 100%)
-                .attr("class", legend);
-
     var circles = legendContain.enter().append("g");
 
     var circle = circles.append("circle")
@@ -201,7 +196,7 @@ d3.json("json/world.json", function(error, topology) {
             	.attr("y", function(d) {return d.y_axis+5; })
 		.text(function(d){return d.txt;});
 
-    legendContain.append("rect")
+    circles.append("rect")
             .attr("width", "100%")
             .attr("height", "100%")
             .attr("fill", "white");
