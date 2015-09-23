@@ -14,7 +14,7 @@ var tabulate = function (data,columns, columnNames) {
         .text(function (d) { return d })
 
     var rows = tbody.selectAll('tr')
-        .data(data)
+        .data(data).sort()
         .enter()
         .append('tr')
 
