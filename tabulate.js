@@ -8,7 +8,7 @@ var tabulate = function (data,columns) {
 
     thead.append('tr')
         .selectAll('th')
-        .data(columns)
+        .data(columnsNames)
         .enter()
         .append('th')
         .text(function (d) { return d })
@@ -26,12 +26,13 @@ var tabulate = function (data,columns) {
         })
         .enter()
         .append('td')
-        .text(function (d) { return d.value })
+        .text(function (d) { return (d.value ? d.value : "No Data") })
 
     return table;
 }
 
 d3.csv('json/CSV Data/o.csv',function (data) {
+    var columnNames = ['Country', 'Data Year', 'Polity IV Score', 'Internet Users', 'GDP per capita growth (annual %)'];
     var columns = ['Country','data_year','p4_score','CCode', 'IU_2014', 'GDPPCC_2014']
     tabulate(data,columns)
 })
