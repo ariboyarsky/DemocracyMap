@@ -104,7 +104,7 @@ d3.json("json/world.json", function(error, topology) {
       .append("path")
       .attr("class", function(d){
             //color code map
-                var score = d.properties.p4_score;
+                var score = (d.properties.p4_score)?d.properties.p4_score:"noData";
                 var cl = "";
                 if(score == 10) {
                     cl = "fullDemocracy";
