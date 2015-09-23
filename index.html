@@ -178,10 +178,15 @@ d3.json("json/world.json", function(error, topology) {
     var legendContain = d3.select("svg").append("svg")
             .attr("width", 300)
             .attr("height", 200)
-            .attr("class", "legend")
+            //.attr("class", "legend")
 	    .attr("y", 250)
 	    .selectAll("g")
 	    .data(legendCircles);
+
+        legendContain.append("rect")
+                .attr("width", 100%)
+                .attr("height", 100%)
+                .attr("class", legend);
 
     var circles = legendContain.enter().append("g");
 
