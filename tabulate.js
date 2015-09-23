@@ -32,6 +32,6 @@ var tabulate = function (data,columns) {
 }
 
 d3.csv('json/CSV Data/o.csv',function (data) {
-    var columns = ['variable','aror','asd','maxdd']
+    var columns = ['Country','data_year','p4_score','CCode', 'IU_2014', 'GDPPCC_2014']
     tabulate(data,columns)
 })
