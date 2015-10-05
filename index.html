@@ -82,7 +82,7 @@
   <script src="http://d3js.org/queue.v1.min.js"></script>
   <script type="text/javascript" src="js/tooltip.js"></script>
   <script type="text/javascript">
-  var colorCode = document.getElementsByName('colorCode');
+  var colorCode = document.getElementById('cc');
 
   var width = 1000,
     height = 600,
@@ -130,7 +130,7 @@ d3.json("json/world.json", function(error, topology) {
                 }
                 cl += " state";
                 return cl;
-              }
+           }
         })
       .attr("d", path)
       .on("dblclick", dblClicked)
@@ -216,7 +216,7 @@ d3.json("json/world.json", function(error, topology) {
   </script>
   <div class="info">
     <label for="colorCode">Color Code map based on: </label>
-    <select name="colorCode">
+    <select id='cc' name="colorCode">
       <option value="polity">Polity IV Scores</option>
       <option value="IU">Internet Users</option>
     </select>
