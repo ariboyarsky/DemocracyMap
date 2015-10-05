@@ -132,7 +132,7 @@ d3.json("json/world.json", function(error, topology) {
       .on("dblclick", dblClicked)
       .call(d3.helper.tooltip(
                     function(d, i){
-                        return '<b>'+ d.properties.sovereignt 
+                        return '<b>'+ d.properties.sovereignt
 				+ '</b><br /><span>Polity IV Score: '
 				+(d.properties.p4_score ? d.properties.p4_score : 'No Data')
 				+'<br />GDP per capita annual growth: '+(d.properties.GDPPCC_2014 ? Math.round(d.properties.GDPPCC_2014*1000)/1000+'%' : 'No Data')
@@ -149,7 +149,7 @@ d3.json("json/world.json", function(error, topology) {
             y = centroid[1];
             k = 4;
             centered = d;
-	    legendBG.attr("fill-opacity", 0.5);	
+	    legendBG.attr("fill-opacity", 0.5);
         } else {
             x = width / 2;
             y = height / 2;
@@ -188,13 +188,13 @@ d3.json("json/world.json", function(error, topology) {
                       .attr("height", "100%")
                       .attr("fill", "white")
                       .attr("fill-opacity", 0);
-	
+
 	var h  = legendContain.selectAll("g")
              .data(legendCircles);
 
 
     var circles = h.enter().append("g");
- 		
+
     var circle = circles.append("circle")
             .attr("cx", function(d){return d.x_axis; })
             .attr("cy", function(d){return d.y_axis; })
@@ -211,6 +211,11 @@ d3.json("json/world.json", function(error, topology) {
 
   </script>
   <div class="info">
+    <label for="colorCode">Color Code map based on: </label>
+    <select name="colorCode">
+      <option value="polity">Polity IV Scores</option>
+      <option value="IU">Internet Users</option>
+    </select>
 <p> The above map portrays useful data in understanding global political and economic trends. Double click on states to zoom in and out. This is currently a work in progress. </p>
 <p>Click <a href="data.html">here</a> to see the dataset that this map is based on.</p>
   <p> Please note:
