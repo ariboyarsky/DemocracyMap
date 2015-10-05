@@ -82,6 +82,8 @@
   <script src="http://d3js.org/queue.v1.min.js"></script>
   <script type="text/javascript" src="js/tooltip.js"></script>
   <script type="text/javascript">
+  var colorCode = document.getElementsByName('colorCode');
+
   var width = 1000,
     height = 600,
           centered;
@@ -108,6 +110,7 @@ d3.json("json/world.json", function(error, topology) {
       .append("path")
       .attr("class", function(d){
             //color code map
+            if(colorCode.options[colorCode.selectedIndex].value == 'polity'){
                 var score = (d.properties.p4_score)?d.properties.p4_score:"noData";
                 var cl = "";
                 if(score == 10) {
@@ -127,6 +130,7 @@ d3.json("json/world.json", function(error, topology) {
                 }
                 cl += " state";
                 return cl;
+              }
         })
       .attr("d", path)
       .on("dblclick", dblClicked)
