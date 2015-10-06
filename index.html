@@ -85,8 +85,9 @@
   <script type="text/javascript">
 	$(document).ready(function() {
 		  var colorCode = document.getElementById('cc');
+      createMap(colorCode);
 		//alert(colorCode);
-
+});
 
   var width = 1000,
     height = 600,
@@ -106,6 +107,7 @@ var path = d3.geo.path()
 var g = svg.append("g");
 
 // load and display the World
+function createMap(colorCode){
 d3.json("json/world.json", function(error, topology) {
     g.selectAll("path")
       .data(topojson.feature(topology, topology.objects.states)
@@ -216,8 +218,7 @@ d3.json("json/world.json", function(error, topology) {
 		.text(function(d){return d.txt;});
 
   });
-
-});
+}
   </script>
   <div class="map-here"></div>
   <div class="info">
