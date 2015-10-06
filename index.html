@@ -192,7 +192,7 @@ function createPolityLegend(){
     var legendContain = d3.select("div.map-here").append("svg")
             .attr("width", 300)
             .attr("height", 200)
-            //.attr("class", "legend")
+            .attr("class", "pleg")
 	    .attr("y", 250);
 
     legendBG = legendContain.append("rect")
@@ -221,6 +221,8 @@ function createPolityLegend(){
 }//end create polity legend
 function removeMap(){
     d3.select("svg#map").transition().duration(1000).style('opacity', 0).remove();
+    //remove polity legend
+    d3.select("svg#pleg").transition().duration(1000).style('opacity', 0).remove();
 }
 $(document).ready(function() {
     var colorCode = document.getElementById('cc');
