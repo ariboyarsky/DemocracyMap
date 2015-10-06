@@ -96,7 +96,7 @@ function createMap(colorCode) {
             .scale(150);
 
     var svg = d3.select("div.map-here").append("svg")
-            .attr("id", "map");
+            .attr("id", "map")
             .attr("width", width)
             .attr("height", height);
 
@@ -188,7 +188,7 @@ function createPolityLegend(){
         {"x_axis": 30, "y_axis": 180, "radius": 10, "class": "noData", "txt": "No Polity Data"}
     ];
 
-    var legendContain = d3.select("svg").append("svg")
+    var legendContain = d3.select("svg#map").append("svg")
             .attr("width", 300)
             .attr("height", 200)
             //.attr("class", "legend")
@@ -217,7 +217,7 @@ function createPolityLegend(){
             	.attr("y", function(d) {return d.y_axis+5; })
 		.text(function(d){return d.txt;});
 
-}//end cretae polity legend
+}//end create polity legend
 function removeMap(){
     d3.select("svg#map").transition().duration(1000).style('opacity', 0).remove();
 }
@@ -228,7 +228,7 @@ $(document).ready(function() {
         var colorData = colorCode.value;
         removeMap();
         createMap(colorData);
-        if(colorCode.value == 'polity'){
+        if(colorData == 'polity'){
             createPolityLegend();
         }
     });
