@@ -192,7 +192,7 @@ function createPolityLegend(){
     var legendContain = d3.select("div.map-here").append("svg")
             .attr("width", 300)
             .attr("height", 200)
-            .attr("class", "pleg")
+            .attr("id", "pleg")
 	    .attr("y", 250);
 
     legendBG = legendContain.append("rect")
