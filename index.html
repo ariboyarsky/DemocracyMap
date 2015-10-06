@@ -114,7 +114,7 @@ d3.json("json/world.json", function(error, topology) {
       .append("path")
       .attr("class", function(d){
             //color code map
-           // if(colorCode.options[colorCode.selectedIndex].value == 'polity'){
+            if(colorCode.value == 'polity'){
                 var score = (d.properties.p4_score)?d.properties.p4_score:"noData";
                 var cl = "";
                 if(score == 10) {
@@ -134,7 +134,7 @@ d3.json("json/world.json", function(error, topology) {
                 }
                 cl += " state";
                 return cl;
-           //}
+           }
         })
       .attr("d", path)
       .on("dblclick", dblClicked)
@@ -175,7 +175,7 @@ d3.json("json/world.json", function(error, topology) {
                 .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
                 .style("stroke-width", 1.5 / k + "px");
     }
-
+    //polity legend
     var legendCircles = [
         {"x_axis": 30, "y_axis": 30, "radius": 10, "class": "fullDemocracy", "txt": "Full Democracy (Polity IV: 10)"},
         {"x_axis": 30, "y_axis": 55, "radius": 10, "class": "democracy", "txt": "Democracy (Polity IV: 6 to 9)"},
