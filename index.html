@@ -83,12 +83,6 @@
   <script type="text/javascript" src="js/tooltip.js"></script>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script type="text/javascript">
-	$(document).ready(function() {
-		  var colorCode = document.getElementById('cc');
-      createMap(colorCode);
-		//alert(colorCode);
-});
-
   var width = 1000,
     height = 600,
           centered;
@@ -219,6 +213,12 @@ d3.json("json/world.json", function(error, topology) {
 
   });
 }
+
+$(document).ready(function() {
+    var colorCode = document.getElementById('cc');
+    createMap(colorCode);
+  //alert(colorCode);
+});
   </script>
   <div class="map-here"></div>
   <div class="info">
