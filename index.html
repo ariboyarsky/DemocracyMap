@@ -11,7 +11,7 @@
       margin: auto;
       text-align: center;
       display: block;
-     
+
   }
   body{
       font-size: 14px;
@@ -86,67 +86,69 @@
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script type="text/javascript">
       // load and display the World
-function createMap(colorCode){
-  var width = 1000,
-    height = 600,
-          centered;
+function createMap(colorCode) {
+    var width = 1000,
+            height = 600,
+            centered;
 
-var projection = d3.geo.mercator()
-    .center([0, 5 ])
-    .scale(150);
+    var projection = d3.geo.mercator()
+            .center([0, 5])
+            .scale(150);
 
-var svg = d3.select("div.map-here").append("svg")
-    .attr("width", width)
-    .attr("height", height);
+    var svg = d3.select("div.map-here").append("svg")
+            .attr("width", width)
+            .attr("height", height);
 
-var path = d3.geo.path()
-    .projection(projection);
+    var path = d3.geo.path()
+            .projection(projection);
 
-var g = svg.append("g");
+    var g = svg.append("g");
 
-d3.json("json/world.json", function(error, topology) {
-    g.selectAll("path")
-      .data(topojson.feature(topology, topology.objects.states)
-          .features)
-    .enter()
-      .append("path")
-      .attr("class", function(d){
-            //color code map
-            if(colorCode == 'polity'){
-                var score = (d.properties.p4_score)?d.properties.p4_score:"noData";
-                var cl = "";
-                if(score == 10) {
-                    cl = "fullDemocracy";
-                }else if(score >= 6 && score < 10) {
-                    cl = "democracy";
-                }else if(score >=1 && score < 6) {
-                    cl = "openAuto";
-                }else if(score >= -5 && score < 0) {
-                    cl = "closedAuto";
-                }else if(score >= -10 && score < -5) {
-                    cl = "auto";
-                }else if (score == 0) {
-                    cl = "failed";
-                }else {
-                    cl = "noData";
-                }
-                cl += " state";
-                return cl;
-           }
-        })
-      .attr("d", path)
-      .on("dblclick", dblClicked)
-      .call(d3.helper.tooltip(
-                    function(d, i){
-                        return '<b>'+ d.properties.sovereignt
-				+ '</b><br /><span>Polity IV Score: '
-				+(d.properties.p4_score ? d.properties.p4_score : 'No Data')
-				+(d.properties.p4_score ? d.properties.p4_score : 'No Data')
-				+'<br />GDP per capita annual growth: '+(d.properties.GDPPCC_2014 ? Math.round(d.properties.GDPPCC_2014*1000)/1000+'%' : 'No Data')
-				+'<br />Internet Users (per 100 people): '+(d.properties.IU_2014 ? d.properties.IU_2014 : 'No Data')
-				+'</span><div style="clear: both"></div>';
+    d3.json("json/world.json", function (error, topology) {
+        g.selectAll("path")
+                .data(topojson.feature(topology, topology.objects.states)
+                        .features)
+                .enter()
+                .append("path")
+                .attr("class", function (d) {
+                    //color code map
+                    if (colorCode == 'polity') {
+                        var score = (d.properties.p4_score) ? d.properties.p4_score : "noData";
+                        var cl = "";
+                        if (score == 10) {
+                            cl = "fullDemocracy";
+                        } else if (score >= 6 && score < 10) {
+                            cl = "democracy";
+                        } else if (score >= 1 && score < 6) {
+                            cl = "openAuto";
+                        } else if (score >= -5 && score < 0) {
+                            cl = "closedAuto";
+                        } else if (score >= -10 && score < -5) {
+                            cl = "auto";
+                        } else if (score == 0) {
+                            cl = "failed";
+                        } else {
+                            cl = "noData";
+                        }
+                        cl += " state";
+                        return cl;
                     }
-            ));
+                })
+                .attr("d", path)
+                .on("dblclick", dblClicked)
+                .call(d3.helper.tooltip(
+                        function (d, i) {
+                            return '<b>' + d.properties.sovereignt
+                                    + '</b><br /><span>Polity IV Score: '
+                                    + (d.properties.p4_score ? d.properties.p4_score : 'No Data')
+                                    + (d.properties.p4_score ? d.properties.p4_score : 'No Data')
+                                    + '<br />GDP per capita annual growth: ' + (d.properties.GDPPCC_2014 ? Math.round(d.properties.GDPPCC_2014 * 1000) / 1000 + '%' : 'No Data')
+                                    + '<br />Internet Users (per 100 people): ' + (d.properties.IU_2014 ? d.properties.IU_2014 : 'No Data')
+                                    + '</span><div style="clear: both"></div>';
+                        }
+                ));
+    });
+}// end polity map
     function dblClicked(d) {
         var x, y, k;
 
@@ -173,6 +175,7 @@ d3.json("json/world.json", function(error, topology) {
                 .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
                 .style("stroke-width", 1.5 / k + "px");
     }
+function createPolityLegend(){
     //polity legend
     var legendCircles = [
         {"x_axis": 30, "y_axis": 30, "radius": 10, "class": "fullDemocracy", "txt": "Full Democracy (Polity IV: 10)"},
@@ -213,8 +216,7 @@ d3.json("json/world.json", function(error, topology) {
             	.attr("y", function(d) {return d.y_axis+5; })
 		.text(function(d){return d.txt;});
 
-  });
-}
+}//end cretae polity legend
 function removeMap(){
     d3.select("svg").transition().duration(1000).style('opacity', 0).remove();
 }
@@ -225,8 +227,14 @@ $(document).ready(function() {
         var colorData = colorCode.value;
         removeMap();
         createMap(colorData);
+        if(colorCode.value == 'polity'){
+            createPolityLegend();
+        }
     });
     createMap(colorCode.value);
+    if(colorCode.value == 'polity'){
+        createPolityLegend();
+    }
   //alert(colorCode);
 });
   </script>
