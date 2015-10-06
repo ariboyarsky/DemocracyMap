@@ -110,7 +110,7 @@ d3.json("json/world.json", function(error, topology) {
       .append("path")
       .attr("class", function(d){
             //color code map
-            if(colorCode.value == 'polity'){
+            if(colorCode == 'polity'){
                 var score = (d.properties.p4_score)?d.properties.p4_score:"noData";
                 var cl = "";
                 if(score == 10) {
@@ -213,9 +213,17 @@ d3.json("json/world.json", function(error, topology) {
 
   });
 }
-
+function removeMap(){
+    svg = d3.select("div.map-here").transition();
+}
 $(document).ready(function() {
     var colorCode = document.getElementById('cc');
+    $('select#id').on('change', function () {
+        //change color code
+        var colorData = colorCode.value;
+        removeMap();
+        createMap(colorData);
+    });
     createMap(colorCode);
   //alert(colorCode);
 });
