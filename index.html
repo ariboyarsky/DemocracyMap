@@ -214,7 +214,7 @@ d3.json("json/world.json", function(error, topology) {
   });
 }
 function removeMap(){
-    d3.select("svg").transition().remove();
+    d3.select("svg").transition().delay(750).remove();
 }
 $(document).ready(function() {
     var colorCode = document.getElementById('cc');
