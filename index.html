@@ -149,10 +149,9 @@ function createMap(colorCode) {
                         }
                 ));
     });
-}// end polity map
     function dblClicked(d) {
         var x, y, k;
-        var centered = null;
+       // var centered = null;
         if (d && centered !== d) {
             var centroid = path.centroid(d);
             x = centroid[0];
@@ -176,6 +175,7 @@ function createMap(colorCode) {
                 .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
                 .style("stroke-width", 1.5 / k + "px");
     }
+}// end polity map
 function createPolityLegend(){
     //polity legend
     var legendCircles = [
