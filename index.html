@@ -96,7 +96,7 @@ var projection = d3.geo.mercator()
     .center([0, 5 ])
     .scale(150);
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("div.map-here").append("svg")
     .attr("width", width)
     .attr("height", height);
 
@@ -219,6 +219,7 @@ d3.json("json/world.json", function(error, topology) {
 
 });
   </script>
+  <div class="map-here"></div>
   <div class="info">
     <label for="colorCode">Color Code map based on: </label>
     <select id="cc" name="colorCode">
