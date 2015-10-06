@@ -96,6 +96,7 @@ function createMap(colorCode) {
             .scale(150);
 
     var svg = d3.select("div.map-here").append("svg")
+            .attr("id", "map");
             .attr("width", width)
             .attr("height", height);
 
@@ -218,7 +219,7 @@ function createPolityLegend(){
 
 }//end cretae polity legend
 function removeMap(){
-    d3.select("svg").transition().duration(1000).style('opacity', 0).remove();
+    d3.select("svg#map").transition().duration(1000).style('opacity', 0).remove();
 }
 $(document).ready(function() {
     var colorCode = document.getElementById('cc');
